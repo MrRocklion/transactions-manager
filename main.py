@@ -1,7 +1,6 @@
 import socket
 import requests
 import json
-from datetime import datetime
 HOST = '192.168.10.1'
 PORT = 5000
 
@@ -28,7 +27,6 @@ def main():
                     if decoded.startswith('$>') and decoded.endswith('#'):
                         data_string = decoded[2:-1]  
                         aux_data = str(data_string[1:-1])
-                        data_time = datetime.now()
                         code =aux_data[25:34]
                         card_type = int(aux_data[14:18])
                         date = aux_data[6:8]+'-'+aux_data[8:10]+'-'+aux_data[10:14]
@@ -45,7 +43,6 @@ def main():
                             "balance": balance,
                             "last_balance": before_balance,
                         }
-                        print(f"Datos recibidos: {data_formated}")
                         transaction_requests(data_formated)
 
                 except socket.timeout:
