@@ -1,0 +1,21 @@
+sudo nano /etc/systemd/system/transactions_manager.service
+sudo systemctl daemon-reload
+sudo systemctl enable transactions_manager
+sudo systemctl restart transactions_manager
+
+
+
+[Install]
+WantedBy=multi-user.target
+[Unit]
+Description=App para registrar las transacciones del sistema de recaudo
+after=network.target
+
+[Service]
+User=admin
+WorkingDirectory=/home/admin/transactions_manager/
+ExecStart=/home/admin/env/bin/python3 /home/admin/transactions_manager/main.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
